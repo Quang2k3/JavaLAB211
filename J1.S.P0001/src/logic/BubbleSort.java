@@ -1,5 +1,6 @@
-package Logic;
+package logic;
 
+import constant.Constant;
 import java.util.Random;
 
 /**
@@ -21,21 +22,25 @@ public class BubbleSort {
         }
     }
 
-    public void bubbleSort(boolean check) {
+    public void bubbleSort(final String SORT_TYPE) {
         for (int i = 0; i < arr.length - 1; i++) {
             for (int j = 0; j < arr.length - i - 1; j++) {
-                if (check) {
-                    if (arr[j] > arr[j + 1]) {
-                        int temp = arr[j];
-                        arr[j] = arr[j + 1];
-                        arr[j + 1] = temp;
-                    }
-                } else {
-                    if (arr[j] < arr[j + 1]) {
-                        int temp = arr[j];
-                        arr[j] = arr[j + 1];
-                        arr[j + 1] = temp;
-                    }
+                switch (SORT_TYPE) {
+                    case Constant.ASC:
+                        if (arr[j] > arr[j + 1]) {
+                            int temp = arr[j];
+                            arr[j] = arr[j + 1];
+                            arr[j + 1] = temp;
+                        }
+                        break;
+
+                    case Constant.DESC:
+                        if (arr[j] < arr[j + 1]) {
+                            int temp = arr[j];
+                            arr[j] = arr[j + 1];
+                            arr[j + 1] = temp;
+                        }
+                        break;
                 }
             }
         }

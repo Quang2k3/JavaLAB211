@@ -1,7 +1,8 @@
-package Main;
+package main;
 
-import Logic.BubbleSort;
-import static Validate.Validate.getInt;
+import logic.BubbleSort;
+import static validate.Validate.getInt;
+import constant.Constant;
 
 /**
  *
@@ -18,7 +19,9 @@ public class Main {
         System.out.println("Unsorted:");
         sort.displayArray();
         System.out.println("Sorted:");
-        sort.bubbleSort(false);
+        String type_sort1 = "ASC";
+        String type_sort2 = "DESC";
+        sort.bubbleSort(type_sort1);
         sort.displayArray();
     }
 }
