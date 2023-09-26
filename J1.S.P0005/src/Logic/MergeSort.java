@@ -16,7 +16,7 @@ public class MergeSort {
         this.length = length;
         this.arr = new int[length];
         this.tempMergArr = new int[length];
-        generateRandomIntegerOfArray();
+        generateRandomArray();
     }
 
     public void displayArray() {
@@ -27,11 +27,10 @@ public class MergeSort {
                 System.out.print(", ");
             }
         }
-        System.out.print("]");
-        System.out.println();
+        System.out.println("]");
     }
 
-    public void generateRandomIntegerOfArray() {
+    public void generateRandomArray() {
         Random random = new Random();
         for (int i = 0; i < arr.length; i++) {
             arr[i] = random.nextInt(arr.length + 1);

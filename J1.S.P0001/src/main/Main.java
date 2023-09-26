@@ -2,7 +2,6 @@ package main;
 
 import logic.BubbleSort;
 import static validate.Validate.getInt;
-import constant.Constant;
 
 /**
  *
@@ -13,7 +12,11 @@ public class Main {
     public static void main(String[] args) {
         
         int numberOfArray = getInt("Enter number of array: ", 
-                "Number must be integer", "Number of array", 0, Integer.MAX_VALUE);
+                                   "Number must be integer", 
+                                   "Number of array", 0, 
+                                   Integer.MAX_VALUE
+    );
+        
         BubbleSort sort = new BubbleSort(numberOfArray);
         sort.generateRandomIntegerOfArray();
         System.out.println("Unsorted:");
