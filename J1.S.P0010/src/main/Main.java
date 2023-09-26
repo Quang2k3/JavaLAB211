@@ -1,4 +1,4 @@
-package Main;
+package main;
 
 import logic.LinearSearch;
 import static validate.Validate.getInt;
