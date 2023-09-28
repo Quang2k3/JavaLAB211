@@ -9,43 +9,66 @@ import java.util.Random;
  */
 public class BubbleSort {
 
-    int arr[];
+    private int arr[];
+
+    public int[] getArr() {
+        return arr;
+    }
+
+    public void setArr(int[] arr) {
+        this.arr = arr;
+    }
 
     public BubbleSort(int numberOfArray) {
         arr = new int[numberOfArray];
     }
 
-    public void generateRandomIntegerOfArray() {
+    /**
+     * Generate random of array
+     */
+    public void generateRandomArray() {
         Random random = new Random();
         for (int i = 0; i < arr.length; i++) {
             arr[i] = random.nextInt(arr.length + 1);
         }
     }
 
+    /**
+     * Sorted an array by ascending or descending
+     *
+     * @param SORT_TYPE using input ASC to be sort ascending or DESC to be sort
+     *                  descending
+     */
     public void bubbleSort(final String SORT_TYPE) {
-        for (int i = 0; i < arr.length - 1; i++) {
-            for (int j = 0; j < arr.length - i - 1; j++) {
-                switch (SORT_TYPE) {
-                    case Constant.ASC:
+        switch (SORT_TYPE) {
+            case Constant.ASC:
+                for (int i = 0; i < arr.length - 1; i++) {
+                    for (int j = 0; j < arr.length - i - 1; j++) {
                         if (arr[j] > arr[j + 1]) {
                             int temp = arr[j];
                             arr[j] = arr[j + 1];
                             arr[j + 1] = temp;
                         }
-                        break;
-
-                    case Constant.DESC:
+                    }
+                }
+                break;
+            case Constant.DESC:
+                for (int i = 0; i < arr.length - 1; i++) {
+                    for (int j = 0; j < arr.length - i - 1; j++) {
                         if (arr[j] < arr[j + 1]) {
                             int temp = arr[j];
                             arr[j] = arr[j + 1];
                             arr[j + 1] = temp;
                         }
-                        break;
+                    }
                 }
-            }
+                break;
         }
     }
 
+    /**
+     * Display an array
+     */
     public void displayArray() {
         System.out.print("[");
         for (int i = 0; i < arr.length; i++) {
@@ -54,8 +77,6 @@ public class BubbleSort {
                 System.out.print(", ");
             }
         }
-        System.out.print("]");
-        System.out.println();
+        System.out.println("]");
     }
-
 }

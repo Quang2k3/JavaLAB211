@@ -23,7 +23,7 @@ public class Main {
                 Integer.MAX_VALUE
         );
         LinearSearch search = new LinearSearch(numberOfArray);
-        search.generateRandomIntegerOfArray();
+        search.generateRandomArray();
         search.displayArray();
         search.linearSearch(searchValue);
         search.displayIndexArray(searchValue);

@@ -38,7 +38,7 @@ public class LinearSearch {
     /**
      * 
      */
-    public void generateRandomIntegerOfArray() {
+    public void generateRandomArray() {
         Random random = new Random();
         for (int i = 0; i < arr.length; i++) {
             arr[i] = random.nextInt(arr.length + 1);
@@ -46,9 +46,10 @@ public class LinearSearch {
     }
     
     /**
+     * Search an value in the array and get the index
      * 
-     * @param searchValue
-     * @return 
+     * @param searchValue input an value to be search in array
+     * @return the array result index
      */
     public int[] linearSearch(int searchValue) {
         List<Integer> positions = new ArrayList<>();

@@ -8,33 +8,35 @@ import java.util.Scanner;
  * @author Quang
  */
 public class Validate {
-        
-    public static final Scanner SCANNER = new Scanner(System.in);
     
     /**
-     * Returns the valid integer value scanner from the input
-     * 
-     * @param messageInfo               the message to be printed instructing
-     *                                  the user to input
-     * @param messageErrorOutOfRange    the message will be printed if the String
-     *                                  parse is out of range
-     * @param messageErrorInvalidNumber the message will be printed if the String
-     *                                  does not contain a parable integer
-     * @param min                       minimum limit value
-     * @param max                       maximum limit value
-     * @return the valid integer value scanner from the input
+     * Don't let anyone instantiate this class.
      */
-    
+    private Validate() {}
+
+    /**
+     * Check the input value and input message
+     * 
+     * @param messageInfo               the message to be printed instructing 
+     *                                  the user to input
+     * @param messageErrorOutOfRange    the message to be printed if the String 
+     *                                  parse value is out of range
+     * @param messageErrorInvalidNumber the message to be printed if the String
+     *                                  does not contain a parable integer
+     * @param min                       minimum Limit value
+     * @param max                       maximum Limit value
+     * @return the valid integer value scanned from the input
+     */
     public static int getInt(
             String messageInfo,
             String messageErrorOutOfRange,
             String messageErrorInvalidNumber,
-            int min, int max
-    ) {
-        do {            
+            int min, int max) {
+        Scanner scanner = new Scanner(System.in);
+        do {
             try {
-                System.out.print(messageInfo);
-                int number = Integer.parseInt(SCANNER.nextLine());
+                System.out.println(messageInfo);
+                int number = Integer.parseInt(scanner.nextLine());
                 if (number >= min && number <= max) {
                     return number;
                 }
@@ -44,5 +46,4 @@ public class Validate {
             }
         } while (true);
     }
-    
 }

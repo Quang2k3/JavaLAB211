@@ -13,14 +13,14 @@ public class Validate {
     /**
      * Returns the valid integer value scanner from the input
      *
-     * @param messageInfo the message to be printed instructing the user to
-     * input
-     * @param messageErrorOutOfRange the message will be printed if the String
-     * parse is out of range
+     * @param messageInfo               the message to be printed instructing 
+     *                                  the user to input
+     * @param messageErrorOutOfRange    the message will be printed if the 
+     *                                  String parse is out of range
      * @param messageErrorInvalidNumber the message will be printed if the
-     * String does not contain a parable integer
-     * @param min minimum limit value
-     * @param max maximum limit value
+     *                                  String does not contain a parable integer
+     * @param min                       minimum limit value
+     * @param max                       maximum limit value
      * @return the valid integer value scanner from the input
      */
     public static int getInt(
