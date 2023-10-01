@@ -7,6 +7,11 @@ import java.util.Scanner;
  * @author Quang
  */
 public class Validate {
+
+    /**
+     * Don't let anyone instantiate this class.
+     */
+    public Validate() {}
     
     /**
      * Returns the valid integer value scanner from the input
