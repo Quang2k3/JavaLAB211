@@ -8,7 +8,7 @@ import java.util.Random;
  * @author Quang
  */
 public class MergeSort {
-
+    
     private int arr[];
     private int tempMergArr[];
     private int length;
@@ -43,6 +43,9 @@ public class MergeSort {
         this.tempMergArr = new int[length];
     }
 
+    /**
+     * Display the elements of the array.
+     */
     public void displayArray() {
         System.out.print("[");
         for (int i = 0; i < arr.length; i++) {
@@ -54,6 +57,9 @@ public class MergeSort {
         System.out.println("]");
     }
 
+    /**
+     * Generate a random array of integers.
+     */
     public void generateRandomArray() {
         Random random = new Random();
         for (int i = 0; i < arr.length; i++) {
@@ -61,10 +67,24 @@ public class MergeSort {
         }
     }
 
+    /**
+     * Sort the array in ascending or descending order.
+     *
+     * @param SORT_TYPE Use "ASC" to sort in ascending order or 
+     *                  "DESC" to sort in descending order.
+     */
     public void sort(final String SORT_TYPE) {
         doMergeSort(0, length - 1, SORT_TYPE);
     }
 
+    /**
+     * Perform the merge sort algorithm.
+     *
+     * @param lowerIndex  The lower index of the array to be sorted.
+     * @param higherIndex The higher index of the array to be sorted.
+     * @param SORT_TYPE   Use "ASC" to sort in ascending order or 
+     *                    "DESC" to sort in descending order.
+     */
     public void doMergeSort(
             int lowerIndex, 
             int higherIndex, 
@@ -79,11 +99,13 @@ public class MergeSort {
     }
 
     /**
+     * Merge two sorted parts of the array in ascending or descending order.
      *
-     * @param lowerIndex    
-     * @param middle        
-     * @param higherIndex   
-     * @param check         
+     * @param lowerIndex  The lower index of the first part.
+     * @param middle      The middle index of the first part.
+     * @param higherIndex The higher index of the second part.
+     * @param SORT_TYPE   Use "ASC" to merge in ascending order or 
+     *                    "DESC" to merge in descending order.
      */
     private void mergeParts(
             int lowerIndex, int middle, 
