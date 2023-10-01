@@ -1,5 +1,6 @@
 package Logic;
 
+import constant.Constant;
 import java.util.Random;
 
 /**
@@ -8,15 +9,38 @@ import java.util.Random;
  */
 public class MergeSort {
 
-    int arr[];
-    int tempMergArr[];
-    int length;
+    private int arr[];
+    private int tempMergArr[];
+    private int length;
+
+    public int[] getArr() {
+        return arr;
+    }
+
+    public void setArr(int[] arr) {
+        this.arr = arr;
+    }
+
+    public int[] getTempMergArr() {
+        return tempMergArr;
+    }
+
+    public void setTempMergArr(int[] tempMergArr) {
+        this.tempMergArr = tempMergArr;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
+    }
 
     public MergeSort(int length) {
         this.length = length;
         this.arr = new int[length];
         this.tempMergArr = new int[length];
-        generateRandomArray();
     }
 
     public void displayArray() {
@@ -36,29 +60,36 @@ public class MergeSort {
             arr[i] = random.nextInt(arr.length + 1);
         }
     }
-    
-    public void sort(boolean check) {
-        doMergeSort(0, length - 1, check);
+
+    public void sort(final String SORT_TYPE) {
+        doMergeSort(0, length - 1, SORT_TYPE);
     }
 
-    public void doMergeSort(int lowerIndex, int higherIndex, boolean check) {
+    public void doMergeSort(
+            int lowerIndex, 
+            int higherIndex, 
+            final String SORT_TYPE
+    ) {
         if (lowerIndex < higherIndex) {
             int middle = lowerIndex + (higherIndex - lowerIndex) / 2;
-            doMergeSort(lowerIndex, middle, check);
-            doMergeSort(middle + 1, higherIndex, check);
-            mergeParts(lowerIndex, middle, higherIndex, check);
+            doMergeSort(lowerIndex, middle, SORT_TYPE);
+            doMergeSort(middle + 1, higherIndex, SORT_TYPE);
+            mergeParts(lowerIndex, middle, higherIndex, SORT_TYPE);
         }
     }
-    
+
     /**
-     * 
+     *
      * @param lowerIndex    
      * @param middle        
      * @param higherIndex   
      * @param check         
      */
-
-    private void mergeParts(int lowerIndex, int middle, int higherIndex, boolean check) {
+    private void mergeParts(
+            int lowerIndex, int middle, 
+            int higherIndex, 
+            final String SORT_TYPE
+    ) {
         for (int i = lowerIndex; i <= higherIndex; i++) {
             tempMergArr[i] = arr[i];
         }
@@ -66,24 +97,27 @@ public class MergeSort {
         int j = middle + 1;
         int k = lowerIndex;
         while (i <= middle && j <= higherIndex) {
-            if (check) {
-                if (tempMergArr[i] <= tempMergArr[j]) {
-                    arr[k] = tempMergArr[i];
-                    i++;
-                } else {
-                    arr[k] = tempMergArr[j];
-                    j++;
-                }
-                k++;
-            } else {
-                if (tempMergArr[i] >= tempMergArr[j]) {
-                    arr[k] = tempMergArr[i];
-                    i++;
-                } else {
-                    arr[k] = tempMergArr[j];
-                    j++;
-                }
-                k++;
+            switch (SORT_TYPE) {
+                case Constant.ASC:
+                    if (tempMergArr[i] <= tempMergArr[j]) {
+                        arr[k] = tempMergArr[i];
+                        i++;
+                    } else {
+                        arr[k] = tempMergArr[j];
+                        j++;
+                    }
+                    k++;
+                    break;
+                case Constant.DESC:
+                    if (tempMergArr[i] >= tempMergArr[j]) {
+                        arr[k] = tempMergArr[i];
+                        i++;
+                    } else {
+                        arr[k] = tempMergArr[j];
+                        j++;
+                    }
+                    k++;
+                    break;
             }
         }
         while (i <= middle) {

@@ -14,10 +14,13 @@ public class Main {
         int numberOfArray = getInt("Enter number of array: ",
                 "Number must be integer", "Number of array", 0, Integer.MAX_VALUE);
         MergeSort sort = new MergeSort(numberOfArray);
+        sort.generateRandomArray();
         System.out.print("Unsorted array: ");
         sort.displayArray();
-        sort.sort(true);
-        System.out.print("Sorted array: ");
+        System.out.println("Sorted array: ");
+        sort.sort("ASC");
+        sort.displayArray();
+        sort.sort("DESC");
         sort.displayArray();
 
     }
