@@ -1,7 +1,7 @@
-package Main;
+package main;
 
-import Logic.MergeSort;
-import static Validate.Validate.getInt;
+import logic.MergeSort;
+import static validate.Validate.getInt;
 
 /**
  *
@@ -10,10 +10,14 @@ import static Validate.Validate.getInt;
 public class Main {
 
     public static void main(String[] args) {
-
-        int numberOfArray = getInt("Enter number of array: ",
-                "Number must be integer", "Number of array", 0, Integer.MAX_VALUE);
-        MergeSort sort = new MergeSort(numberOfArray);
+        MergeSort sort = new MergeSort(
+                getInt(
+                        "Enter number of array: ",
+                        "Number must be integer",
+                        "Number of array", 0,
+                        Integer.MAX_VALUE
+                )
+        );
         sort.generateRandomArray();
         System.out.print("Unsorted array: ");
         sort.displayArray();
@@ -22,6 +26,5 @@ public class Main {
         sort.displayArray();
         sort.sort("DESC");
         sort.displayArray();
-
     }
 }

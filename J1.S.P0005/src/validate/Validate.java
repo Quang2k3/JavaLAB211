@@ -1,4 +1,4 @@
-package Validate;
+package validate;
 
 import java.util.Scanner;
 
@@ -8,8 +8,6 @@ import java.util.Scanner;
  */
 public class Validate {
     
-    public static final Scanner SCANNER = new Scanner(System.in);
-
     /**
      * Returns the valid integer value scanner from the input
      *
@@ -29,10 +27,11 @@ public class Validate {
             String messageErrorInvalidNumber,
             int min, int max
     ) {
+        Scanner sc = new Scanner(System.in);
         do {
             try {
                 System.out.print(messageInfo);
-                int number = Integer.parseInt(SCANNER.nextLine());
+                int number = Integer.parseInt(sc.nextLine());
                 if (number >= min && number <= max) {
                     return number;
                 }

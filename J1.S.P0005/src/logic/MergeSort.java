@@ -1,4 +1,4 @@
-package Logic;
+package logic;
 
 import constant.Constant;
 import java.util.Random;
