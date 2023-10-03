@@ -23,10 +23,19 @@ public class Manager {
         System.out.print("Enter availability: ");
         int availability = Validate.checkInputInt();
         if (!Validate.checkDuplicate(ld, code, name, specialization, availability)) {
-            System.err.println("Duplicate.");
+            System.out.println("Duplicate.");
             return;
         }
         ld.add(new Doctor(code, name, specialization, availability));
-        System.err.println("Add successful.");
+        System.out.println("Add successful.");
+    }
+    
+    public static void updateDoctor(ArrayList<Doctor> ld) {
+        System.out.print("Enter code: ");
+        String code = Validate.checkInputString();
+        if (Validate.checkCodeExits(ld, code)) {
+            System.out.println("Not found doctor");
+            return;
+        }
     }
 }
