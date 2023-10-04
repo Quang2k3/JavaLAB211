@@ -10,6 +10,16 @@ import java.util.ArrayList;
  */
 public class Manager {
 
+    public static int menu() {
+        System.out.println("1. Add doctor");
+        System.out.println("2. Update doctor");
+        System.out.println("3. Delete doctor");
+        System.out.println("4. Search doctor");
+        System.out.println("5. Exit");
+        int choice = Validate.checkInputIntLimit(1, 5);
+        return choice;
+    }
+    
     public static void addDoctor(ArrayList<Doctor> ld) {
         System.out.print("Enter code: ");
         String code = Validate.checkInputString();

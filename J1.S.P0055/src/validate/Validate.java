@@ -22,7 +22,7 @@ public class Validate {
                 return result;
             } catch (NumberFormatException e) {
                 System.out.println("Please input number in rage "
-                        + "[" + min + ", " + "]");
+                        + "[" + min + ", " + max + "]");
                 System.out.print("Enter again: ");
             }
         }
