@@ -12,7 +12,7 @@ public class Validate {
 
     private final static Scanner SCANNER = new Scanner(System.in);
 
-    final static int checkInputIntLimit(int min, int max) {
+    public static int checkInputIntLimit(int min, int max) {
         while (true) {
             try {
                 int result = Integer.parseInt(SCANNER.nextLine().trim());
@@ -21,7 +21,8 @@ public class Validate {
                 }
                 return result;
             } catch (NumberFormatException e) {
-                System.out.println("Please input number in rage [" + min + ", " + "]");
+                System.out.println("Please input number in rage "
+                        + "[" + min + ", " + "]");
                 System.out.print("Enter again: ");
             }
         }
@@ -51,27 +52,14 @@ public class Validate {
         }
     }
 
-    public static boolean checkCodeExits(ArrayList<Doctor> ld, String code) {
+    public static boolean checkCodeExist(
+            ArrayList<Doctor> ld,
+            String code
+    ) {
         for (Doctor doctor : ld) {
             if (code.equalsIgnoreCase(doctor.getCode())) {
                 return false;
             }
-        }
-        return true;
-    }
-
-    public static boolean checkChangeInfo(
-            Doctor doctor,
-            String code,
-            String name,
-            String specialization,
-            int availability
-    ) {
-        if (doctor.getCode().equalsIgnoreCase(code)
-                && doctor.getName().equalsIgnoreCase(name)
-                && doctor.getSpecialization().equalsIgnoreCase(specialization)
-                && doctor.getAvailability() == availability) {
-            return false;
         }
         return true;
     }
@@ -90,6 +78,22 @@ public class Validate {
                     && availability == doctor.getAvailability()) {
                 return false;
             }
+        }
+        return true;
+    }
+
+    public static boolean checkChangeInfo(
+            Doctor doctor,
+            String code,
+            String name,
+            String specialization,
+            int availability
+    ) {
+        if (doctor.getCode().equalsIgnoreCase(code)
+                && doctor.getName().equalsIgnoreCase(name)
+                && doctor.getSpecialization().equalsIgnoreCase(specialization)
+                && doctor.getAvailability() == availability) {
+            return false;
         }
         return true;
     }
