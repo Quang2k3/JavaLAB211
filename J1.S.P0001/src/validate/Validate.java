@@ -31,7 +31,8 @@ public class Validate {
             String messageInfo,
             String messageErrorOutOfRange,
             String messageErrorInvalidNumber,
-            int min, int max) {
+            int min, int max
+    ) {
         Scanner scanner = new Scanner(System.in);
         do {
             try {

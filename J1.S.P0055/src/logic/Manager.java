@@ -58,7 +58,8 @@ public class Manager {
         String specialization = Validate.checkInputString();
         System.out.print("Enter availability: ");
         int availability = Validate.checkInputInt();
-        if (!Validate.checkChangeInfo(doctor, code, name, specialization, availability)) {
+        if (!Validate.checkChangeInfo(doctor, code, name, 
+                specialization, availability)) {
             System.err.println("No change");
             return;
         }
@@ -82,7 +83,6 @@ public class Manager {
         System.err.println("Delete successful.");
     }
 
-    //allow user search doctor
     public static void searchDoctor(ArrayList<Doctor> ld) {
         System.out.print("Enter name: ");
         String nameSearch = Validate.checkInputString();
