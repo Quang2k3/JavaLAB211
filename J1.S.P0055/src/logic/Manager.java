@@ -10,85 +10,72 @@ import java.util.ArrayList;
  */
 public class Manager {
 
-    public static int menu() {
-        System.out.println("1. Add doctor");
-        System.out.println("2. Update doctor");
-        System.out.println("3. Delete doctor");
-        System.out.println("4. Search doctor");
-        System.out.println("5. Exit");
-        int choice = Validate.checkInputIntLimit(1, 5);
-        return choice;
-    }
-    
-    public static void addDoctor(ArrayList<Doctor> ld) {
-        System.out.print("Enter code: ");
-        String code = Validate.checkInputString();
-        if (!Validate.checkCodeExist(ld, code)) {
-            System.out.println("Code exist.");
-            return;
-        }
-        System.out.print("Enter name: ");
-        String name = Validate.checkInputString();
-        System.out.print("Enter specialization: ");
-        String specialization = Validate.checkInputString();
-        System.out.print("Enter availability: ");
-        int availability = Validate.checkInputInt();
-        if (!Validate.checkDuplicate(ld, code,
-                name, specialization, availability)) {
-            System.out.println("Duplicate.");
-            return;
-        }
-        ld.add(new Doctor(code, name, specialization, availability));
-        System.out.println("Add successful.");
-    }
-
-    public static void updateDoctor(ArrayList<Doctor> ld) {
-        System.out.print("Enter code: ");
+    public static void updateDoctor(ArrayList<Doctor> ld,
+            String infoMessage,
+            String errorMessage,
+            String updateCodeMessage,
+            String codeMessage,
+            String nameMessage,
+            String specializationMessage,
+            String availabilityMessage,
+            String checkStatus,
+            String doneMessage
+    ) {
+        System.out.print(infoMessage);
         String code = Validate.checkInputString();
         if (Validate.checkCodeExist(ld, code)) {
-            System.out.println("Not found doctor");
+            System.out.println(errorMessage);
             return;
         }
-        System.out.print("Enter code: ");
+        System.out.print(codeMessage);
         String codeUpdate = Validate.checkInputString();
         Doctor doctor = getDoctorByCode(ld, code);
-        System.out.print("Enter name: ");
+        System.out.print(nameMessage);
         String name = Validate.checkInputString();
-        System.out.print("Enter specialization: ");
+        System.out.print(specializationMessage);
         String specialization = Validate.checkInputString();
-        System.out.print("Enter availability: ");
+        System.out.print(availabilityMessage);
         int availability = Validate.checkInputInt();
-        if (!Validate.checkChangeInfo(doctor, code, name, 
+        if (!Validate.checkChangeInfo(doctor, code, name,
                 specialization, availability)) {
-            System.err.println("No change");
+            System.err.println(checkStatus);
             return;
         }
         doctor.setCode(codeUpdate);
         doctor.setName(name);
         doctor.setSpecialization(specialization);
         doctor.setAvailability(availability);
-        System.err.println("Update successful");
+        System.err.println(doneMessage);
     }
 
-    public static void deleteDoctor(ArrayList<Doctor> ld) {
-        System.out.print("Enter code: ");
+    public static void deleteDoctor(
+            ArrayList<Doctor> ld, 
+            String codeMessage, 
+            String errorMessage, 
+            String doneMessage
+    ) {
+        System.out.print(codeMessage);
         String code = Validate.checkInputString();
         Doctor doctor = getDoctorByCode(ld, code);
         if (doctor == null) {
-            System.err.println("Not found doctor.");
+            System.err.println(errorMessage);
             return;
         } else {
             ld.remove(doctor);
         }
-        System.err.println("Delete successful.");
+        System.err.println(doneMessage);
     }
 
-    public static void searchDoctor(ArrayList<Doctor> ld) {
-        System.out.print("Enter name: ");
+    public static void searchDoctor(
+            ArrayList<Doctor> ld, 
+            String nameMessage, 
+            String errorMessage
+    ) {
+        System.out.print(nameMessage);
         String nameSearch = Validate.checkInputString();
         ArrayList<Doctor> listFoundByName = listFoundByName(ld, nameSearch);
         if (listFoundByName.isEmpty()) {
-            System.err.println("List empty.");
+            System.err.println(errorMessage);
         } else {
             System.out.printf("%-10s%-15s%-25s%-20s\n", "Code", "Name",
                     "Specialization", "Availability");
