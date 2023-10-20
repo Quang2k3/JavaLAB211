@@ -1,12 +1,10 @@
-package logic;
-
-import constant.Shape;
+package entity;
 
 /**
  *
  * @author Quang
  */
-public class Circle implements Shape {
+public class Circle extends Shape {
 
     private double radius;
 

@@ -1,6 +1,7 @@
 package main;
 
-import logic.Circle;
+import entity.Circle;
+import entity.Shape;
 
 /**
  *
@@ -9,7 +10,7 @@ import logic.Circle;
 public class Main {
 
     public static void main(String[] args) {
-        Circle circle = new Circle(
+        Shape shape = new Circle(
                 validate.Validate.getDouble(
                         "Please input radius of Circle: ",
                         "Number must be positive number.",
@@ -18,6 +19,6 @@ public class Main {
                 )
         );
         
-        circle.printResult();
+        shape.printResult();
     }
 }

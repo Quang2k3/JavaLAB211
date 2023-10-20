@@ -2,7 +2,7 @@ package main;
 
 import entity.Doctor;
 import java.util.ArrayList;
-import logic.Manager;
+import bo.DoctorBO;
 import validate.Validate;
 
 /**
@@ -22,29 +22,25 @@ public class Main {
             int choice = Validate.checkInputIntLimit(1, 5);
             switch (choice) {
                 case 1:
-                    Doctor.addDoctor(
-                            ld, "Enter code: ", "Code exits.", 
-                            "Enter name: ", "Enter specialization", 
-                            "Enter availabitlity", "Duplicate", "Add successful");
+                    DoctorBO.addDoctor(
+                            ld, "Code exits.",
+                            "Duplicate", "Add successful");
                     break;
                 case 2:
-                    Manager.updateDoctor(
-                            ld, "Enter code: ", "Not found doctor", 
-                            "Enter update code: ", "Enter code: ", 
-                            "Enter name: ", "Enter specialization: ", 
-                            "Enter availability: ", "No change", 
+                    DoctorBO.updateDoctor(
+                            ld, "Not found doctor",
+                            "No change",
                             "Update successful"
                     );
                     break;
                 case 3:
-                    Manager.deleteDoctor(
-                            ld, "Enter code: ", 
-                            "Not found doctor", 
+                    DoctorBO.deleteDoctor(
+                            ld, "Not found doctor",
                             "Delete successful."
                     );
                     break;
                 case 4:
-                    Manager.searchDoctor(ld, "Enter name: ", "List empty.");
+                    DoctorBO.searchDoctor(ld, "List empty.");
                     break;
                 case 5:
                     return;

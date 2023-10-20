@@ -1,10 +1,11 @@
-package constant;
+package entity;
 
 /**
  *
  * @author Quang
  */
-public interface Shape {
+public abstract class Shape {
+    
     public abstract double getPerimeter();
     
     public abstract double getArea();
