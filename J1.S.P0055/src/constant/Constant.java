@@ -7,13 +7,13 @@ package constant;
 public class Constant {
 
     /**
-     *  Allows only letters (both uppercase and lowercase).
+     * Allows only letters (both uppercase and lowercase).
      */
     public static final String REGEX_NAME = "^[a-zA-Z]{1,}$";
 
     /**
-     * Allows for IDs in the format "HE123456" or "HS123456" where the last 
-     * six characters are digits.
+     * Represents an ID format where it starts with "DOC" followed by a space
+     * and then a sequence of one or more digits (e.g., "DOC 1").
      */
     public static final String REGEX_ID = "^DOC\\s\\d+$";
 
