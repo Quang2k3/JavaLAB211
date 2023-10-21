@@ -1,6 +1,8 @@
 package entity;
 
+import constant.Constant;
 import java.util.ArrayList;
+import java.util.List;
 import validate.Validate;
 
 /**
@@ -61,7 +63,48 @@ public class Doctor {
         this.availability = availability;
     }
     
-    public void input() {
-        this.name = Validate.checkInputString(name, name, specialization, code);
+    public void input(
+            List<Doctor> ld, 
+            String errorMessage,
+            String checkStatus,
+            String doneMessage
+    ) {
+        this.code = Validate.checkInputString(
+                "Enter code: ", 
+                "Must be follow format", 
+                "Enter again: ", 
+                Constant.REGEX_ID
+        );
+        this.name = Validate.checkInputString(
+                "Enter name: ", 
+                "Must follow format", 
+                "Enter again: ", 
+                Constant.REGEX_NAME
+        );
+        this.specialization = Validate.checkInputString(
+                "Enter specialization: ", 
+                "Must be follow format.", 
+                "Enter again: ", 
+                Constant.REGEX_SP
+        );
+        this.availability = Validate.checkInputInt(
+                "Enter availability: ", 
+                "Must be follow format", 
+                "Enter again: ", 
+                Constant.REGEX_ONLY_DIGITS
+        );
+        
+        if (!Validate.checkDuplicate(ld, code,
+                name, specialization, availability)) {
+            System.out.println(checkStatus);
+            return;
+        }
+        ld.add(new Doctor(code, name, specialization, availability));
+        System.out.println(doneMessage);
+    }
+    
+    public void display() {
+        System.out.printf("%10s| %10s| %10s| %10s|\n",
+                code, name, specialization, availability);
     }
 }

@@ -15,7 +15,7 @@ public class Constant {
      * Allows for IDs in the format "HE123456" or "HS123456" where the last 
      * six characters are digits.
      */
-    public static final String REGEX_ID = "^(HE|HS)\\d{6}$";
+    public static final String REGEX_ID = "^DOC\\s\\d+$";
 
     /**
      * Allows only letters (both uppercase and lowercase).

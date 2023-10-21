@@ -1,8 +1,8 @@
 package validate;
 
-import constant.Constant;
 import entity.Doctor;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -111,7 +111,7 @@ public class Validate {
      * @return true if the code does not exist in the list, false if it exists.
      */
     public static boolean checkCodeExist(
-            ArrayList<Doctor> ld,
+            List<Doctor> ld,
             String code
     ) {
         for (Doctor doctor : ld) {
@@ -134,7 +134,7 @@ public class Validate {
      * @return true if no matching Doctor is found, false if a match is found.
      */
     public static boolean checkDuplicate(
-            ArrayList<Doctor> ld,
+            List<Doctor> ld,
             String code,
             String name,
             String specialization,
