@@ -11,6 +11,8 @@ public class Main {
 
     public static void main(String[] args) {
         
+        DoctorBO doctorBO = new DoctorBO();
+        
         while (true) {
             System.out.println("1. Add doctor");
             System.out.println("2. Update doctor");
@@ -21,26 +23,26 @@ public class Main {
             int choice = Validate.checkInputIntLimit(1, 5);
             switch (choice) {
                 case 1:
-                    DoctorBO.addDoctor();
+                    doctorBO.addDoctor();
                     break;
                 case 2:
-                    DoctorBO.updateDoctor(
+                    doctorBO.updateDoctor(
                             "Not found doctor",
                             "No change",
                             "Update successful"
                     );
                     break;
                 case 3:
-                    DoctorBO.deleteDoctor(
+                    doctorBO.deleteDoctor(
                             "Not found doctor",
                             "Delete successful."
                     );
                     break;
                 case 4:
-                    DoctorBO.searchDoctor("List empty.");
+                    doctorBO.searchDoctor("List empty.");
                     break;
                 case 5:
-                    DoctorBO.display();
+                    doctorBO.display();
                     break;
                 case 6: 
                     return;

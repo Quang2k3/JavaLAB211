@@ -12,12 +12,12 @@ import java.util.List;
  */
 public class DoctorBO {
 
-    public static List<Doctor> ld = new ArrayList<>();
+    public List<Doctor> ld = new ArrayList<>();
 
     /**
      * Adds a new Doctor to the provided list of Doctors.
      */
-    public static void addDoctor() {
+    public void addDoctor() {
         Doctor doctor = new Doctor();
         doctor.input(ld, "Code exits.", "Duplicate", "Add successful");
     }
@@ -31,7 +31,7 @@ public class DoctorBO {
      * @param doneMessage  The success message to display after updating the
      *                     Doctor.
      */
-    public static void updateDoctor(
+    public void updateDoctor(
             String errorMessage,
             String checkStatus,
             String doneMessage
@@ -85,7 +85,7 @@ public class DoctorBO {
      * @param doneMessage  The success message to display after deleting the
      * Doctor.
      */
-    public static void deleteDoctor(
+    public void deleteDoctor(
             String errorMessage,
             String doneMessage
     ) {
@@ -108,7 +108,7 @@ public class DoctorBO {
      *
      * @param errorMessage The error message to display if no Doctors are found.
      */
-    public static void searchDoctor(String errorMessage) {
+    public void searchDoctor(String errorMessage) {
         String nameSearch = Validate.checkInputString(
                 "Enter name: ",
                 "Not empty\n",
@@ -135,7 +135,7 @@ public class DoctorBO {
      * @param code The code of the Doctor to retrieve.
      * @return the Doctor with the specified code, or null if not found.
      */
-    public static Doctor getDoctorByCode(String code) {
+    public Doctor getDoctorByCode(String code) {
         for (Doctor doctor : ld) {
             if (doctor.getCode().equalsIgnoreCase(code)) {
                 return doctor;
@@ -150,7 +150,7 @@ public class DoctorBO {
      * @param name The name to search for.
      * @return a list of Doctors with names containing the specified name.
      */
-    public static List<Doctor> listFoundByName(String name) {
+    public List<Doctor> listFoundByName(String name) {
         List<Doctor> listFoundByName = new ArrayList<>();
         for (Doctor doctor : ld) {
             if (doctor.getName().contains(name)) {
@@ -160,7 +160,7 @@ public class DoctorBO {
         return listFoundByName;
     }
 
-    public static void display() {
+    public void display() {
         ld.forEach((Doctor doctor) -> {
             doctor.display();
         });
