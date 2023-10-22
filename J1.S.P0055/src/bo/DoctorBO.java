@@ -42,7 +42,6 @@ public class DoctorBO {
         );
         if (Validate.checkCodeExist(ld, code)) {
             System.out.println(errorMessage);
-            return;
         }
         String codeUpdate = Validate.checkInputString(
                 "Enter code update :", "Not Empty",
@@ -68,14 +67,13 @@ public class DoctorBO {
         );
         if (!Validate.checkChangeInfo(doctor, code, name,
                 specialization, availability)) {
-            System.err.println(checkStatus);
-            return;
+            System.out.println(checkStatus);
         }
         doctor.setCode(codeUpdate);
         doctor.setName(name);
         doctor.setSpecialization(specialization);
         doctor.setAvailability(availability);
-        System.err.println(doneMessage);
+        System.out.println(doneMessage);
     }
 
     /**
@@ -90,17 +88,17 @@ public class DoctorBO {
             String doneMessage
     ) {
         String code = Validate.checkInputString(
-                "Enter code: ", "Not Empty\n",
-                "Enter again: \n", Constant.REGEX_ID
+                "Enter code: ", "Please input correct format.",
+                "Enter again: ", Constant.REGEX_ID
         );
         Doctor doctor = getDoctorByCode(code);
         if (doctor == null) {
-            System.err.println(errorMessage);
+            System.out.println(errorMessage);
             return;
         } else {
             ld.remove(doctor);
         }
-        System.err.println(doneMessage);
+        System.out.println(doneMessage);
     }
 
     /**
@@ -111,13 +109,13 @@ public class DoctorBO {
     public void searchDoctor(String errorMessage) {
         String nameSearch = Validate.checkInputString(
                 "Enter name: ",
-                "Not empty\n",
+                "Not empty",
                 "Enter again: \n",
                 Constant.REGEX_NAME
         );
         List<Doctor> listFoundByName = listFoundByName(nameSearch);
         if (listFoundByName.isEmpty()) {
-            System.err.println(errorMessage);
+            System.out.println(errorMessage);
         } else {
             System.out.printf("%-10s%-15s%-25s%-20s\n", "Code", "Name",
                     "Specialization", "Availability");
@@ -160,9 +158,13 @@ public class DoctorBO {
         return listFoundByName;
     }
 
-    public void display() {
-        ld.forEach((Doctor doctor) -> {
-            doctor.display();
-        });
+    public void display(String messageError) {
+        if (!ld.isEmpty()) {
+            ld.forEach((Doctor doctor) -> {
+                doctor.display();
+            });
+        } else {
+            System.out.println(messageError);
+        }
     }
 }

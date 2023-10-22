@@ -54,8 +54,8 @@ public class Validate {
             String messageErrorInvalidString,
             String regex
     ) {
+        System.out.println(messageInfo);
         while (true) {
-            System.out.println(messageInfo);
             String result = SCANNER.nextLine().trim();
             if (result.isEmpty()) {
                 System.out.println("Not empty");
@@ -86,20 +86,19 @@ public class Validate {
             String messageErrorInvalidString,
             String regex_int
     ) {
+        System.out.println(messageInfo);
         while (true) {
-            System.out.println(messageInfo);
             String input = SCANNER.nextLine().trim();
             if (input.matches(regex_int)) {
                 try {
                     int result = Integer.parseInt(input);
                     return result;
                 } catch (NumberFormatException e) {
-                    System.err.println(messageErrorFormat);
+                    System.out.println(messageErrorFormat);
                 }
             } else {
-                System.err.println(messageErrorInvalidString);
+                System.out.println(messageErrorInvalidString);
             }
-            System.out.print("Enter again: ");
         }
     }
 

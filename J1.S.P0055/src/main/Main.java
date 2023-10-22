@@ -20,7 +20,7 @@ public class Main {
             System.out.println("4. Search doctor");
             System.out.println("5. Display list doctor");
             System.out.println("6. Exits");
-            int choice = Validate.checkInputIntLimit(1, 5);
+            int choice = Validate.checkInputIntLimit(1, 6);
             switch (choice) {
                 case 1:
                     doctorBO.addDoctor();
@@ -42,7 +42,7 @@ public class Main {
                     doctorBO.searchDoctor("List empty.");
                     break;
                 case 5:
-                    doctorBO.display();
+                    doctorBO.display("You need to add doctors");
                     break;
                 case 6: 
                     return;

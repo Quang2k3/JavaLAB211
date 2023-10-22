@@ -72,4 +72,19 @@ public class Validate {
             }
         } while (true);
     }
+    
+    public static boolean checkInputUD(String messageInfo) {
+        while (true) {
+            System.out.println(messageInfo);
+            String result = SCANNER.nextLine();
+            if (result.equalsIgnoreCase("U")) {
+                return true;
+            }
+            if (result.equalsIgnoreCase("D")) {
+                return false;
+            }
+            System.err.println("Please input u/U or d/D.");
+            System.out.print("Enter again: ");
+        }
+    }
 }

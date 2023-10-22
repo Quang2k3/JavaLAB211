@@ -19,8 +19,7 @@ public class StudentBO {
     public boolean addStudent(
             String id,
             String messageInfo,
-            String messageError
-    ) {
+            String messageError) {
         for (Student student : students) {
             if (student.getID().equalsIgnoreCase(id)) {
                 System.out.println(messageInfo);
@@ -38,31 +37,34 @@ public class StudentBO {
     public void findAndSort() {
         if (students.isEmpty()) {
             System.out.println("No students");
-            return;
         }
 
-        Collections.sort(students, new Comparator<Student>() {
-            @Override
-            public int compare(Student student1, Student student2) {
-                return student1.getStName().compareTo(student2.getStName());
-            }
-        });
+        Collections.sort(students,
+                (Student student1, Student student2) -> student1.getStName().compareTo(student2.getStName()));
 
         String name = Validate.getString(
                 "Enter name: ",
                 "Must be follow format",
                 "Enter again: ",
-                Constant.REGEX_STUDENT_NAME
-        );
+                Constant.REGEX_STUDENT_NAME);
 
         for (Student student : students) {
             if (student.getStName().contains(name)) {
-                student.display();
+                if (students.isEmpty()) {
+                    student.display();
+                }
+                else {
+                    System.out.println("No students");
+                }
             }
         }
     }
-    
-    public void remove(int index) {
-        students.remove(index);
+
+    public void updateOrDelete(int index) {
+        if (students.isEmpty()) {
+            System.out.println("No students");
+        } else {
+
+        }
     }
 }
