@@ -1,5 +1,8 @@
 package validate;
 
+import entity.Report;
+import entity.Student;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -7,19 +10,36 @@ import java.util.Scanner;
  * @author Quang
  */
 public class Validate {
-    
+
     private final static Scanner SCANNER = new Scanner(System.in);
 
     public Validate() {
     }
-    
+
+    public static int checkInputIntLimit(int min, int max) {
+        while (true) {
+            try {
+                int result = Integer.parseInt(SCANNER.nextLine().trim());
+                if (result < min || result > max) {
+                    throw new NumberFormatException();
+
+                }
+                return result;
+            } catch (NumberFormatException e) {
+                System.out.println("Please input number in rage [" + min + ", "
+                        + max + "]");
+                System.out.print("Enter again: ");
+            }
+        }
+    }
+
     public static int getInt(
-            String messageInfo, 
-            String messageErrorOutOfRange, 
-            String messageErrorInvalidNumber, 
+            String messageInfo,
+            String messageErrorOutOfRange,
+            String messageErrorInvalidNumber,
             int min, int max
     ) {
-        do {            
+        do {
             try {
                 System.out.println(messageInfo);
                 int number = Integer.parseInt(SCANNER.nextLine());
@@ -32,14 +52,14 @@ public class Validate {
             }
         } while (true);
     }
-    
+
     public static double getDouble(
-            String messageInfo, 
-            String messageErrorOutOfRange, 
-            String messageErrorInvalidNumber, 
+            String messageInfo,
+            String messageErrorOutOfRange,
+            String messageErrorInvalidNumber,
             double min, double max
     ) {
-        do {            
+        do {
             try {
                 System.out.println(messageInfo);
                 double number = Double.parseDouble(SCANNER.nextLine());
@@ -51,7 +71,7 @@ public class Validate {
             }
         } while (true);
     }
-    
+
     public static String getString(
             String messageInfo,
             String messageErrorFormat,
@@ -72,10 +92,10 @@ public class Validate {
             }
         } while (true);
     }
-    
+
     public static boolean checkInputUD(String messageInfo) {
+        System.out.println(messageInfo);
         while (true) {
-            System.out.println(messageInfo);
             String result = SCANNER.nextLine();
             if (result.equalsIgnoreCase("U")) {
                 return true;
@@ -83,8 +103,31 @@ public class Validate {
             if (result.equalsIgnoreCase("D")) {
                 return false;
             }
-            System.err.println("Please input u/U or d/D.");
+            System.out.println("Please input u/U or d/D.");
             System.out.print("Enter again: ");
         }
+    }
+
+    public static boolean checkChangeInfomation(Student student, String id,
+            String name, String semester, String course) {
+        if (id.equalsIgnoreCase(student.getID())
+                && name.equalsIgnoreCase(student.getStName())
+                && semester.equalsIgnoreCase(student.getSemester())
+                && course.equalsIgnoreCase(student.getCourseName())) {
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean checkReportExist(List<Report> lr, String name,
+            String course, int total) {
+        for (Report report : lr) {
+            if (name.equalsIgnoreCase(report.getStudentName())
+                    && course.equalsIgnoreCase(report.getCourseName())
+                    && total == report.getTotalCourse()) {
+                return false;
+            }
+        }
+        return true;
     }
 }

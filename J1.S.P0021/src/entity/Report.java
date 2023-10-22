@@ -5,28 +5,25 @@ package entity;
  * @author Quang
  */
 public class Report {
-    
-    private String name;
-    
+    private String studentName;
     private String courseName;
-    
-    private int totalOfCourse;
+    private int totalCourse;
 
     public Report() {
     }
 
-    public Report(String name, String courseName, int totalOfCourse) {
-        this.name = name;
+    public Report(String studentName, String courseName, int totalCourse) {
+        this.studentName = studentName;
         this.courseName = courseName;
-        this.totalOfCourse = totalOfCourse;
+        this.totalCourse = totalCourse;
     }
 
-    public String getName() {
-        return name;
+    public String getStudentName() {
+        return studentName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
     }
 
     public String getCourseName() {
@@ -37,21 +34,21 @@ public class Report {
         this.courseName = courseName;
     }
 
-    public int getTotalOfCourse() {
-        return totalOfCourse;
+    public int getTotalCourse() {
+        return totalCourse;
     }
 
-    public void setTotalOfCourse(int totalOfCourse) {
-        this.totalOfCourse = totalOfCourse;
+    public void setTotalCourse(int totalCourse) {
+        this.totalCourse = totalCourse;
     }
     
-    public void input(Student info) {
-        this.name = info.getCourseName();
-        this.courseName = info.getStName();
-        this.totalOfCourse = 1;
+    public void input(Student info){
+        this.studentName = info.getStName();
+        this.courseName = info.getCourseName();
+        this.totalCourse = 1;
     }
     
-    public void display() {
-        System.out.printf("|%10s |%10s |%10s \n", name, courseName, totalOfCourse);
+    public void display(){
+        System.out.printf("|%10s |%10s |%10s ", studentName, courseName, totalCourse);
     }
 }

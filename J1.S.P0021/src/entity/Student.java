@@ -8,6 +8,7 @@ import constant.Constant;
  * @author Quang
  */
 public class Student {
+
     private String ID;
     private String stName;
     private String semester;
@@ -17,9 +18,9 @@ public class Student {
     }
 
     public Student(
-            String ID, 
-            String stName, 
-            String semester, 
+            String ID,
+            String stName,
+            String semester,
             String courseName
     ) {
         this.ID = ID;
@@ -59,39 +60,38 @@ public class Student {
     public void setCourseName(String courseName) {
         this.courseName = courseName;
     }
-    
+
     public void input() {
         this.ID = Validate.getString(
-                "Enter ID: ", 
-                "Must be follow format: ", 
-                "Your ID not valid.", 
+                "Enter ID: ",
+                "Must be follow format: ",
+                "Your ID not valid.",
                 Constant.REGEX_ID
         );
-        
+
         this.stName = Validate.getString(
-                "Enter your name: ", 
-                "Must be follow format: ", 
-                "Your name not valid.", 
+                "Enter your name: ",
+                "Must be follow format: ",
+                "Your name not valid.",
                 Constant.REGEX_STUDENT_NAME
         );
-        
+
         this.semester = Validate.getString(
-                "Enter semester: ", 
-                "Must be follow format: ", 
-                "Your semester not valid.", 
+                "Enter semester: ",
+                "Must be follow format: ",
+                "Your semester not valid.",
                 Constant.REGEX_SEMESTER
         );
-        
+
         this.courseName = Validate.getString(
-                "Enter your course name: ", 
-                "Must be follow format: ", 
-                "Your course name not valid.", 
+                "Enter your course name: ",
+                "Must be follow format: ",
+                "Your course name not valid.",
                 Constant.REGEX_COURSE_NAME
         );
     }
-    
+
     public void display() {
-        System.out.printf("%15s| %15s| %15s|\n", stName, semester, courseName);
+        System.out.printf("%10s| %10s| %10s|\n", stName, semester, courseName);
     }
 }
-
