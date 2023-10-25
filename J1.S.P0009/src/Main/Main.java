@@ -1,6 +1,8 @@
 package Main;
 
-import Validate.Fibonacci;
+import java.util.Scanner;
+import logic.Fibonacci;
+
 
 /**
  *
@@ -9,11 +11,11 @@ import Validate.Fibonacci;
 public class Main {
     
     public static void main(String[] args) {
-        int n = 45; 
-        Fibonacci fibonacci = new Fibonacci(n);
-        System.out.println("The " + n + " sequence fibonacci:");
-        for (int i = 0; i < n; i++) {
-            System.out.print(fibonacci.calculateFibonacci(i) + ", ");
-        }
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Input number: ");
+        int number = scanner.nextInt();
+        System.out.println("The " + number + " sequence of Fibonacci: ");
+        Fibonacci fibonacci = new Fibonacci();
+        fibonacci.display(number);
     }
 }
