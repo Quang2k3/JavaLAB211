@@ -1,7 +1,6 @@
 package entity;
 
 import constant.Constant;
-import java.util.ArrayList;
 import java.util.List;
 import validate.Validate;
 
@@ -62,38 +61,47 @@ public class Doctor {
     public void setAvailability(int availability) {
         this.availability = availability;
     }
-    
+
+    /**
+     * Input and validate a doctor's information.
+     *
+     * @param ld The list of doctors to check for duplicates.
+     * @param errorMessage The error message when data is invalid.
+     * @param checkStatus  The check message when information is a duplicate.
+     * @param doneMessage  The success message when a doctor is added to the
+     *                     list.
+     */
     public void input(
-            List<Doctor> ld, 
+            List<Doctor> ld,
             String errorMessage,
             String checkStatus,
             String doneMessage
     ) {
         this.code = Validate.checkInputString(
-                "Enter code: ", 
-                "Must be follow format", 
-                "Enter again: ", 
+                "Enter code: ",
+                "Must be follow format",
+                "Enter again: ",
                 Constant.REGEX_ID
         );
         this.name = Validate.checkInputString(
-                "Enter name: ", 
-                "Must follow format", 
-                "Enter again: ", 
+                "Enter name: ",
+                "Must follow format",
+                "Enter again: ",
                 Constant.REGEX_NAME
         );
         this.specialization = Validate.checkInputString(
-                "Enter specialization: ", 
-                "Must be follow format.", 
-                "Enter again: ", 
+                "Enter specialization: ",
+                "Must be follow format.",
+                "Enter again: ",
                 Constant.REGEX_SP
         );
         this.availability = Validate.checkInputInt(
-                "Enter availability: ", 
-                "Must be follow format", 
-                "Enter again: ", 
+                "Enter availability: ",
+                "Must be follow format",
+                "Enter again: ",
                 Constant.REGEX_ONLY_DIGITS
         );
-        
+
         if (!Validate.checkDuplicate(ld, code,
                 name, specialization, availability)) {
             System.out.println(checkStatus);
@@ -102,7 +110,10 @@ public class Doctor {
         ld.add(new Doctor(code, name, specialization, availability));
         System.out.println(doneMessage);
     }
-    
+
+    /**
+     * Display the information of doctor
+     */
     public void display() {
         System.out.printf("%10s| %10s| %10s| %10s|\n",
                 code, name, specialization, availability);

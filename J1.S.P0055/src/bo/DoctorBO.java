@@ -158,6 +158,11 @@ public class DoctorBO {
         return listFoundByName;
     }
 
+    /**
+     * Display the information of doctor.
+     * 
+     * @param messageError The error message display when list is empty.
+     */
     public void display(String messageError) {
         if (!ld.isEmpty()) {
             ld.forEach((Doctor doctor) -> {
