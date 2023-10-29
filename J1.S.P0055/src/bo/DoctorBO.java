@@ -1,9 +1,7 @@
 package bo;
 
 import entity.Doctor;
-import validate.Validate;
 import java.util.ArrayList;
-import constant.Constant;
 import java.util.List;
 
 /**
@@ -12,119 +10,77 @@ import java.util.List;
  */
 public class DoctorBO {
 
-    public List<Doctor> ld = new ArrayList<>();
+    private List<Doctor> ld = new ArrayList<>();
 
-    /**
-     * Adds a new Doctor to the provided list of Doctors.
-     */
-    public void addDoctor() {
-        Doctor doctor = new Doctor();
-        doctor.input(ld, "Code exits.", "Duplicate", "Add successful");
+    public DoctorBO() {
+    }
+
+    public void setLd(List<Doctor> ld) {
+        this.ld = ld;
     }
 
     /**
-     * Updates an existing Doctor in the provided list of Doctors.
-     *
-     * @param errorMessage The error message to display if the operation fails.
-     * @param checkStatus  The status message to display if the operation is not
-     *                     allowed.
-     * @param doneMessage  The success message to display after updating the
-     *                     Doctor.
+     * Add a new doctor to the list with user information.
      */
-    public void updateDoctor(
-            String errorMessage,
-            String checkStatus,
-            String doneMessage
-    ) {
-        String code = Validate.checkInputString(
-                "Enter code :", "Please format ",
-                "Enter again: ", Constant.REGEX_ID
-        );
-        if (Validate.checkCodeExist(ld, code)) {
-            System.out.println(errorMessage);
-        }
-        String codeUpdate = Validate.checkInputString(
-                "Enter code update :", "Not Empty",
-                "Enter again: ", Constant.REGEX_ID
-        );
-        Doctor doctor = getDoctorByCode(code);
-        String name = Validate.checkInputString(
-                "Enter name: ",
-                "Not empty",
-                "Enter again: ",
-                Constant.REGEX_NAME
-        );
-        String specialization = Validate.checkInputString(
-                "Input the specialization: ",
-                "Not Empty", "Enter again: ",
-                Constant.REGEX_SP
-        );
-        int availability = Validate.checkInputInt(
-                "Enter availability: ",
-                "Please input a valid integer.",
-                "Please input correct format.",
-                Constant.REGEX_ONLY_DIGITS
-        );
-        if (!Validate.checkChangeInfo(doctor, code, name,
-                specialization, availability)) {
-            System.out.println(checkStatus);
-        }
-        doctor.setCode(codeUpdate);
-        doctor.setName(name);
-        doctor.setSpecialization(specialization);
-        doctor.setAvailability(availability);
-        System.out.println(doneMessage);
+    public void add() {
+        Doctor newDoctor = new Doctor();
+        newDoctor.setCode("");
+        newDoctor.input(ld);
+        ld.add(newDoctor);
+        System.out.println("Doctor added successfully.");
     }
 
     /**
-     * Deletes a Doctor from the provided list of Doctors.
-     *
-     * @param errorMessage The error message to display if the operation fails.
-     * @param doneMessage  The success message to display after deleting the
-     * Doctor.
+     * Update doctor information by their unique code.
+     * 
+     * @param codeUpdate The code of the doctor to update.
      */
-    public void deleteDoctor(
-            String errorMessage,
-            String doneMessage
-    ) {
-        String code = Validate.checkInputString(
-                "Enter code: ", "Please input correct format.",
-                "Enter again: ", Constant.REGEX_ID
-        );
+    public void update(String codeUpdate) {
+        Doctor doctorToUpdate = null;
+        for (Doctor doctor : ld) {
+            if (codeUpdate.equalsIgnoreCase(doctor.getCode())) {
+                doctorToUpdate = doctor;
+                break;
+            }
+        }
+        if (doctorToUpdate != null) {
+            doctorToUpdate.input(ld);
+            System.out.println("Doctor updated successfully");
+        } else {
+            System.out.println("Doctor with the entered code not found");
+        }
+    }
+
+    /**
+     * Deletes a doctor from the list by their unique code.
+     * 
+     * @param code The unique code of the doctor to delete.
+     */
+    public void delete(String code) {
         Doctor doctor = getDoctorByCode(code);
         if (doctor == null) {
-            System.out.println(errorMessage);
+            System.out.println("Doctor does not exist.");
             return;
         } else {
             ld.remove(doctor);
         }
-        System.out.println(doneMessage);
+        System.out.println("Doctor deleted successfully");
     }
 
     /**
-     * Searches for Doctors by name in the provided list of Doctors.
-     *
-     * @param errorMessage The error message to display if no Doctors are found.
+     * Searches for doctors by name and returns a list of matching doctors.
+     * 
+     * @param nameSearch The name to search for.
+     * @return A list of doctors whose names contain the specified search term.
      */
-    public void searchDoctor(String errorMessage) {
-        String nameSearch = Validate.checkInputString(
-                "Enter name: ",
-                "Not empty",
-                "Enter again: \n",
-                Constant.REGEX_NAME
-        );
-        List<Doctor> listFoundByName = listFoundByName(nameSearch);
-        if (listFoundByName.isEmpty()) {
-            System.out.println(errorMessage);
-        } else {
-            System.out.printf("%-10s%-15s%-25s%-20s\n", "Code", "Name",
-                    "Specialization", "Availability");
-            for (Doctor doctor : listFoundByName) {
-                System.out.printf("%-10s%-15s%-25s%-20d\n", doctor.getCode(),
-                        doctor.getName(), doctor.getSpecialization(),
-                        doctor.getAvailability());
-            }
-        }
+    public List<Doctor> search(String nameSearch) {
+        List<Doctor> listFoundByName = new ArrayList<>();
+        ld.stream().filter((doctor) -> (doctor.getName().contains(nameSearch))).
+                forEachOrdered((doctor) -> {
+                    listFoundByName.add(doctor);
+                });
+
+        return listFoundByName;
     }
 
     /**
@@ -143,33 +99,30 @@ public class DoctorBO {
     }
 
     /**
-     * Finds Doctors by name in the provided list of Doctors.
+     * Display list of doctor search
      *
-     * @param name The name to search for.
-     * @return a list of Doctors with names containing the specified name.
+     * @param doctors The list of doctors to display
      */
-    public List<Doctor> listFoundByName(String name) {
-        List<Doctor> listFoundByName = new ArrayList<>();
-        for (Doctor doctor : ld) {
-            if (doctor.getName().contains(name)) {
-                listFoundByName.add(doctor);
-            }
+    public void displayListSearch(List<Doctor> doctors) {
+        if (!doctors.isEmpty()) {
+            doctors.forEach((Doctor doctor) -> {
+                doctor.display();
+            });
+        } else {
+            System.out.println("Can't not find the doctor.");
         }
-        return listFoundByName;
     }
 
     /**
      * Display the information of doctor.
-     * 
-     * @param messageError The error message display when list is empty.
      */
-    public void display(String messageError) {
+    public void display() {
         if (!ld.isEmpty()) {
             ld.forEach((Doctor doctor) -> {
                 doctor.display();
             });
         } else {
-            System.out.println(messageError);
+            System.out.println("");
         }
     }
 }

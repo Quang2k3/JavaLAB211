@@ -61,58 +61,82 @@ public class Doctor {
     public void setAvailability(int availability) {
         this.availability = availability;
     }
-
     /**
-     * Input and validate a doctor's information.
-     *
-     * @param ld The list of doctors to check for duplicates.
-     * @param errorMessage The error message when data is invalid.
-     * @param checkStatus  The check message when information is a duplicate.
-     * @param doneMessage  The success message when a doctor is added to the
-     *                     list.
+     * Input doctor information, including code, name, 
+     * specialization, and availability.
+     * 
+     * @param ld The list of doctors to check for code duplicates.
      */
-    public void input(
-            List<Doctor> ld,
-            String errorMessage,
-            String checkStatus,
-            String doneMessage
-    ) {
-        this.code = Validate.checkInputString(
-                "Enter code: ",
-                "Must be follow format",
-                "Enter again: ",
-                Constant.REGEX_ID
-        );
-        this.name = Validate.checkInputString(
-                "Enter name: ",
-                "Must follow format",
-                "Enter again: ",
-                Constant.REGEX_NAME
-        );
-        this.specialization = Validate.checkInputString(
-                "Enter specialization: ",
-                "Must be follow format.",
-                "Enter again: ",
-                Constant.REGEX_SP
-        );
-        this.availability = Validate.checkInputInt(
-                "Enter availability: ",
-                "Must be follow format",
-                "Enter again: ",
-                Constant.REGEX_ONLY_DIGITS
-        );
 
-        if (!Validate.checkDuplicate(ld, code,
-                name, specialization, availability)) {
-            System.out.println(checkStatus);
-            return;
+    public void input(List<Doctor> ld) {
+        if (code == null || code.isEmpty()) {
+            this.code = Validate.getInputString(
+                    "Enter code: ",
+                    "Must follow format",
+                    "Enter again: ",
+                    Constant.REGEX_ID
+            );
         }
-        ld.add(new Doctor(code, name, specialization, availability));
-        System.out.println(doneMessage);
+
+        if (ld != null) {
+            Doctor existingDoctor = null;
+            for (Doctor doctor : ld) {
+                if (this.code.equalsIgnoreCase(doctor.getCode())) {
+                    existingDoctor = doctor;
+                    break;
+                }
+            }
+
+            if (existingDoctor != null) {
+                this.name = Validate.getInputString(
+                        "Enter updated name: ",
+                        "Must follow format",
+                        "Enter again: ",
+                        Constant.REGEX_NAME
+                );
+
+                this.specialization = Validate.getInputString(
+                        "Enter updated specialization: ",
+                        "Must follow format.",
+                        "Enter again: ",
+                        Constant.REGEX_SP
+                );
+
+                this.availability = Validate.getInt(
+                        "Enter updated availability: ",
+                        "Please input a valid integer.",
+                        "Please input correct format.",
+                        Integer.MIN_VALUE,
+                        Integer.MAX_VALUE
+                );
+            } else {
+                this.name = Validate.getInputString(
+                        "Enter name: ",
+                        "Must follow format",
+                        "Enter again: ",
+                        Constant.REGEX_NAME
+                );
+
+                this.specialization = Validate.getInputString(
+                        "Enter specialization: ",
+                        "Must follow format.",
+                        "Enter again: ",
+                        Constant.REGEX_SP
+                );
+
+                this.availability = Validate.getInt(
+                        "Enter availability: ",
+                        "Please input a valid integer.",
+                        "Please input correct format.",
+                        Integer.MIN_VALUE,
+                        Integer.MAX_VALUE
+                );
+            }
+        }
     }
 
     /**
-     * Display the information of doctor
+     * Display the information of doctor.
      */
     public void display() {
         System.out.printf("%10s| %10s| %10s| %10s|\n",

@@ -13,26 +13,42 @@ public class Validate {
     private final static Scanner SCANNER = new Scanner(System.in);
 
     /**
-     * Validates an integer input within a specified range.
-     *
-     * @param min The minimum value allowed.
-     * @param max The maximum value allowed.
-     * @return the validated integer input.
+     * Don't let anyone instantiate this class.
      */
-    public static int checkInputIntLimit(int min, int max) {
-        while (true) {
+    public Validate() {}
+    
+    /**
+     * Returns the valid integer value scanner from the input
+     *
+     * @param messageInfo               the message to be printed instructing 
+     *                                  the user to input
+     * @param messageErrorOutOfRange    the message will be printed if the 
+     *                                  String parse is out of range
+     * @param messageErrorInvalidNumber the message will be printed if the 
+     *                                  String does not contain a parable integer
+     * @param                           min minimum limit value
+     * @param                           max maximum limit value
+     * @return the valid integer value scanner from the input
+     */
+    public static int getInt(
+            String messageInfo,
+            String messageErrorOutOfRange,
+            String messageErrorInvalidNumber,
+            int min, int max
+    ) {
+        Scanner sc = new Scanner(System.in);
+        do {
             try {
-                int result = Integer.parseInt(SCANNER.nextLine().trim());
-                if (result < min || result > max) {
-                    throw new NumberFormatException();
+                System.out.println(messageInfo);
+                int number = Integer.parseInt(sc.nextLine());
+                if (number >= min && number <= max) {
+                    return number;
                 }
-                return result;
+                System.out.println(messageErrorOutOfRange);
             } catch (NumberFormatException e) {
-                System.out.println("Please input number in rage "
-                        + "[" + min + ", " + max + "]");
-                System.out.print("Enter again: ");
+                System.out.println(messageErrorInvalidNumber);
             }
-        }
+        } while (true);
     }
 
     /**
@@ -43,61 +59,27 @@ public class Validate {
      *                                  input format is invalid.
      * @param messageErrorInvalidString The error message to display if the 
      *                                  input is empty.
-     * @param regex                     The regular expression pattern to 
+     * @param REGEX                     The regular expression pattern to 
      *                                  validate against.
      * @return the validated string input.
      */
-    public static String checkInputString(
+    public static String getInputString(
             String messageInfo,
             String messageErrorFormat,
             String messageErrorInvalidString,
-            String regex
+            final String REGEX
     ) {
         System.out.println(messageInfo);
         while (true) {
             String result = SCANNER.nextLine().trim();
             if (result.isEmpty()) {
                 System.out.println("Not empty");
-            } else if (!result.matches(regex)) {
+            } else if (!result.matches(REGEX)) {
                 System.out.println(messageErrorFormat);
             } else {
                 return result;
             }
             System.out.print("Enter again: ");
-        }
-    }
-
-    /**
-     * Validates an integer input using a regular expression pattern.
-     *
-     * @param messageInfo               The prompt message to display.
-     * @param messageErrorFormat        The error message to display if the 
-     *                                  input format is invalid.
-     * @param messageErrorInvalidString The error message to display if the 
-     *                                  input is empty.
-     * @param regex_int                 The regular expression pattern for 
-     *                                  valid integers.
-     * @return the validated integer input.
-     */
-    public static int checkInputInt(
-            String messageInfo,
-            String messageErrorFormat,
-            String messageErrorInvalidString,
-            String regex_int
-    ) {
-        System.out.println(messageInfo);
-        while (true) {
-            String input = SCANNER.nextLine().trim();
-            if (input.matches(regex_int)) {
-                try {
-                    int result = Integer.parseInt(input);
-                    return result;
-                } catch (NumberFormatException e) {
-                    System.out.println(messageErrorFormat);
-                }
-            } else {
-                System.out.println(messageErrorInvalidString);
-            }
         }
     }
 
@@ -108,10 +90,7 @@ public class Validate {
      * @param code The code to check for existence.
      * @return true if the code does not exist in the list, false if it exists.
      */
-    public static boolean checkCodeExist(
-            List<Doctor> ld,
-            String code
-    ) {
+    public static boolean checkCodeExist(List<Doctor> ld, String code) {
         for (Doctor doctor : ld) {
             if (code.equalsIgnoreCase(doctor.getCode())) {
                 return false;
@@ -121,32 +100,22 @@ public class Validate {
     }
 
     /**
-     * Checks if a Doctor with specific attributes already exists in 
-     * the list of Doctors.
+     * Check if a doctor with the specified code already exists in the list.
      *
-     * @param ld             The list of Doctors to check in.
-     * @param code           The code to check for existence.
-     * @param name           The name to check for existence.
-     * @param specialization The specialization to check for existence.
-     * @param availability   The availability to check for existence.
-     * @return true if no matching Doctor is found, false if a match is found.
+     * @param ld   The list of doctors to check for duplicates.
+     * @param code The code to check for duplicates.
+     * @return true if a doctor with the same code exists, otherwise false.
      */
     public static boolean checkDuplicate(
             List<Doctor> ld,
-            String code,
-            String name,
-            String specialization,
-            int availability
+            String code
     ) {
         for (Doctor doctor : ld) {
-            if (code.equalsIgnoreCase(doctor.getCode())
-                    && name.equalsIgnoreCase(doctor.getName())
-                    && specialization.equalsIgnoreCase(doctor.getSpecialization())
-                    && availability == doctor.getAvailability()) {
-                return false;
+            if (code.equalsIgnoreCase(doctor.getCode())) {
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     /**
