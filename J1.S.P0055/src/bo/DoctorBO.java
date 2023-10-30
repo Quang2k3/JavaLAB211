@@ -24,7 +24,7 @@ public class DoctorBO {
      */
     public void add() {
         Doctor newDoctor = new Doctor();
-        newDoctor.input(ld, false); // Pass 'false' to indicate this is an 'add' operation
+        newDoctor.input(ld, false); 
         ld.add(newDoctor);
         System.out.println("Doctor added successfully.");
     }
@@ -43,7 +43,7 @@ public class DoctorBO {
             }
         }
         if (doctorToUpdate != null) {
-            doctorToUpdate.input(ld, true); // Pass 'true' to indicate this is an 'update' operation
+            doctorToUpdate.input(ld, true); 
             System.out.println("Doctor updated successfully");
         } else {
             System.out.println("Doctor with the entered code not found");

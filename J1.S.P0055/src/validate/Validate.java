@@ -106,16 +106,16 @@ public class Validate {
      * @param code The code to check for duplicates.
      * @return true if a doctor with the same code exists, otherwise false.
      */
-    public static boolean checkDuplicate(
+    public static Doctor checkDuplicate(
             List<Doctor> ld,
             String code
     ) {
         for (Doctor doctor : ld) {
             if (code.equalsIgnoreCase(doctor.getCode())) {
-                return true;
+                return doctor;
             }
         }
-        return false;
+        return null;
     }
 
     /**

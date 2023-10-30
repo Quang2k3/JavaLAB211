@@ -67,81 +67,78 @@ public class Doctor {
      * availability.
      *
      * @param ld The list of doctors to check for code duplicates.
+     * @param isUpdate
      */
-public void input(List<Doctor> ld, boolean isUpdate) {
-    while (true) {
-        if (code == null || code.isEmpty()) {
-            this.code = Validate.getInputString(
-                "Enter code: ",
-                "Must follow format",
-                "Enter again: ",
-                Constant.REGEX_ID
-            );
-        }
-
-        Doctor existingDoctor = null;
-        for (Doctor doctor : ld) {
-            if (this.code.equalsIgnoreCase(doctor.getCode())) {
-                existingDoctor = doctor;
-                break;
+    public void input(List<Doctor> ld, boolean isUpdate) {
+        while (true) {
+            if (code == null || code.isEmpty()) {
+                this.code = Validate.getInputString(
+                        "Enter code: ",
+                        "Must follow format",
+                        "Enter again: ",
+                        Constant.REGEX_ID
+                );
             }
-        }
 
-        if (existingDoctor != null) {
-            if (isUpdate) {
-                // In the update scenario, allow other fields to be modified.
+            Doctor existingDoctor = Validate.checkDuplicate(ld, this.code);
+
+            if (existingDoctor != null) {
+                if (isUpdate) {
+                    this.name = Validate.getInputString(
+                            "Enter updated name: ",
+                            "Must follow format",
+                            "Enter again: ",
+                            Constant.REGEX_NAME
+                    );
+
+                    this.specialization = Validate.getInputString(
+                            "Enter updated specialization: ",
+                            "Must follow format.",
+                            "Enter again: ",
+                            Constant.REGEX_SP
+                    );
+
+                    this.availability = Validate.getInt(
+                            "Enter updated availability: ",
+                            "Please input a valid integer.",
+                            "Please input correct format.",
+                            Integer.MIN_VALUE,
+                            Integer.MAX_VALUE
+                    );
+                    break;
+                } else {
+                    System.out.println("Doctor with this code already exists. "
+                            + "Please choose a different code.");
+                    this.code = null;
+                }
+            } else {
                 this.name = Validate.getInputString(
-                    "Enter updated name: ",
-                    "Must follow format",
-                    "Enter again: ",
-                    Constant.REGEX_NAME
+                        isUpdate ? "Enter updated name: " : "Enter name: ",
+                        "Must follow format",
+                        "Enter again: ",
+                        Constant.REGEX_NAME
                 );
 
                 this.specialization = Validate.getInputString(
-                    "Enter updated specialization: ",
-                    "Must follow format.",
-                    "Enter again: ",
-                    Constant.REGEX_SP
+                        isUpdate ? "Enter updated specialization: " : 
+                                "Enter specialization: ",
+                        "Must follow format.",
+                        "Enter again: ",
+                        Constant.REGEX_SP
                 );
 
                 this.availability = Validate.getInt(
-                    "Enter updated availability: ",
-                    "Please input a valid integer.",
-                    "Please input correct format.",
-                    Integer.MIN_VALUE,
-                    Integer.MAX_VALUE
+                        isUpdate ? "Enter updated availability: " : 
+                                "Enter availability: ",
+                        "Please input a valid integer.",
+                        "Please input correct format.",
+                        Integer.MIN_VALUE,
+                        Integer.MAX_VALUE
                 );
                 break;
-            } else {
-                System.out.println("Doctor with this code already exists. Please choose a different code.");
-                this.code = null; // Reset code to force a new input.
             }
-        } else {
-            this.name = Validate.getInputString(
-                isUpdate ? "Enter updated name: " : "Enter name: ",
-                "Must follow format",
-                "Enter again: ",
-                Constant.REGEX_NAME
-            );
-
-            this.specialization = Validate.getInputString(
-                isUpdate ? "Enter updated specialization: " : "Enter specialization: ",
-                "Must follow format.",
-                "Enter again: ",
-                Constant.REGEX_SP
-            );
-
-            this.availability = Validate.getInt(
-                isUpdate ? "Enter updated availability: " : "Enter availability: ",
-                "Please input a valid integer.",
-                "Please input correct format.",
-                Integer.MIN_VALUE,
-                Integer.MAX_VALUE
-            );
-            break; // Exit the loop once a unique code is provided.
         }
     }
-}
 
     /**
      * Display the information of doctor.
