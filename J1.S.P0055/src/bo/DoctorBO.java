@@ -24,15 +24,14 @@ public class DoctorBO {
      */
     public void add() {
         Doctor newDoctor = new Doctor();
-        newDoctor.setCode("");
-        newDoctor.input(ld);
+        newDoctor.input(ld, false); // Pass 'false' to indicate this is an 'add' operation
         ld.add(newDoctor);
         System.out.println("Doctor added successfully.");
     }
 
     /**
      * Update doctor information by their unique code.
-     * 
+     *
      * @param codeUpdate The code of the doctor to update.
      */
     public void update(String codeUpdate) {
@@ -44,7 +43,7 @@ public class DoctorBO {
             }
         }
         if (doctorToUpdate != null) {
-            doctorToUpdate.input(ld);
+            doctorToUpdate.input(ld, true); // Pass 'true' to indicate this is an 'update' operation
             System.out.println("Doctor updated successfully");
         } else {
             System.out.println("Doctor with the entered code not found");
@@ -53,7 +52,7 @@ public class DoctorBO {
 
     /**
      * Deletes a doctor from the list by their unique code.
-     * 
+     *
      * @param code The unique code of the doctor to delete.
      */
     public void delete(String code) {
@@ -69,7 +68,7 @@ public class DoctorBO {
 
     /**
      * Searches for doctors by name and returns a list of matching doctors.
-     * 
+     *
      * @param nameSearch The name to search for.
      * @return A list of doctors whose names contain the specified search term.
      */
