@@ -16,23 +16,6 @@ public class Validate {
     public Validate() {
     }
 
-    public static int checkInputIntLimit(int min, int max) {
-        while (true) {
-            try {
-                int result = Integer.parseInt(SCANNER.nextLine().trim());
-                if (result < min || result > max) {
-                    throw new NumberFormatException();
-
-                }
-                return result;
-            } catch (NumberFormatException e) {
-                System.out.println("Please input number in rage [" + min + ", "
-                        + max + "]");
-                System.out.print("Enter again: ");
-            }
-        }
-    }
-
     public static int getInt(
             String messageInfo,
             String messageErrorOutOfRange,

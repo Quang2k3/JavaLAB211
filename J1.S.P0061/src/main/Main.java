@@ -1,7 +1,9 @@
 package main;
 
 import entity.Circle;
+import entity.Rectangle;
 import entity.Shape;
+import entity.Triangle;
 
 /**
  *
@@ -10,15 +12,16 @@ import entity.Shape;
 public class Main {
 
     public static void main(String[] args) {
-        Shape shape = new Circle(
-                validate.Validate.getDouble(
-                        "Please input radius of Circle: ",
-                        "Number must be positive number.",
-                        "Invalid input. Please enter positive number.",
-                        0.0001, Double.MAX_VALUE
-                )
-        );
+        Shape rectangle = new Rectangle();
+        Shape circle = new Circle();
+        Shape triangle = new Triangle();
         
-        shape.printResult();
+        rectangle.input();
+        circle.input();
+        triangle.input();
+        
+        rectangle.printResult();
+        circle.printResult();
+        triangle.printResult();
     }
 }

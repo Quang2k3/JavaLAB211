@@ -5,6 +5,7 @@ package entity;
  * @author Quang
  */
 public class Report {
+    
     private String studentName;
     private String courseName;
     private int totalCourse;

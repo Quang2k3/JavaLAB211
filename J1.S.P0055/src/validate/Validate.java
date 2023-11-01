@@ -39,7 +39,7 @@ public class Validate {
         Scanner sc = new Scanner(System.in);
         do {
             try {
-                System.out.println(messageInfo);
+                System.out.print(messageInfo);
                 int number = Integer.parseInt(sc.nextLine());
                 if (number >= min && number <= max) {
                     return number;
@@ -52,37 +52,28 @@ public class Validate {
     }
 
     /**
-     * Validates a string input using a regular expression pattern.
-     *
-     * @param messageInfo               The prompt message to display.
-     * @param messageErrorFormat        The error message to display if the 
-     *                                  input format is invalid.
-     * @param messageErrorInvalidString The error message to display if the 
-     *                                  input is empty.
-     * @param REGEX                     The regular expression pattern to 
-     *                                  validate against.
-     * @return the validated string input.
+     *Prompt user for input, validate it using a regular expression, and return it.
+     * 
+     * @param messageInfo  Message displayed for user input.
+     * @param messageError Message for invalid input.
+     * @param REGEX        Regular expression for validation.
+     * @return Validated input matching the specified regular expression.
      */
-    public static String getInputString(
+    public static String getString(
             String messageInfo,
-            String messageErrorFormat,
-            String messageErrorInvalidString,
+            String messageError,
             final String REGEX
     ) {
-        System.out.println(messageInfo);
-        while (true) {
-            String result = SCANNER.nextLine().trim();
-            if (result.isEmpty()) {
-                System.out.println("Not empty");
-            } else if (!result.matches(REGEX)) {
-                System.out.println(messageErrorFormat);
-            } else {
-                return result;
+        do {
+            System.out.print(messageInfo);
+            String str = SCANNER.nextLine();
+            if (str.matches(REGEX)) {
+                return str;
             }
-            System.out.print("Enter again: ");
-        }
+            System.out.println(messageError);
+        } while (true);
     }
-
+    
     /**
      * Checks if a Doctor with a given code already exists in the list of Doctors.
      *

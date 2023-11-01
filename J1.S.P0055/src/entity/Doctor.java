@@ -67,15 +67,16 @@ public class Doctor {
      * availability.
      *
      * @param ld The list of doctors to check for code duplicates.
-     * @param isUpdate
+     * @param action to do "add" to add a new doctor or "update" to update a
+     * doctor.
      */
-    public void input(List<Doctor> ld, boolean isUpdate) {
+    public void input(List<Doctor> ld, String action) {
         while (true) {
             if (code == null || code.isEmpty()) {
-                this.code = Validate.getInputString(
+                this.code = Validate.getString(
                         "Enter code: ",
-                        "Must follow format",
-                        "Enter again: ",
+                        "Must follow format. "
+                        + "\nEnter again: ",
                         Constant.REGEX_ID
                 );
             }
@@ -83,18 +84,18 @@ public class Doctor {
             Doctor existingDoctor = Validate.checkDuplicate(ld, this.code);
 
             if (existingDoctor != null) {
-                if (isUpdate) {
-                    this.name = Validate.getInputString(
+                if (action.equals("UPDATE")) {
+                    this.name = Validate.getString(
                             "Enter updated name: ",
-                            "Must follow format",
-                            "Enter again: ",
+                            "Must follow format.\n"
+                            + "Enter again: ",
                             Constant.REGEX_NAME
                     );
 
-                    this.specialization = Validate.getInputString(
+                    this.specialization = Validate.getString(
                             "Enter updated specialization: ",
-                            "Must follow format.",
-                            "Enter again: ",
+                            "Must follow format.\n"
+                            + "Enter again: ",
                             Constant.REGEX_SP
                     );
 
@@ -106,30 +107,31 @@ public class Doctor {
                             Integer.MAX_VALUE
                     );
                     break;
-                } else {
+                } else if (action.equals("ADD")) {
                     System.out.println("Doctor with this code already exists. "
                             + "Please choose a different code.");
                     this.code = null;
                 }
             } else {
-                this.name = Validate.getInputString(
-                        isUpdate ? "Enter updated name: " : "Enter name: ",
-                        "Must follow format",
-                        "Enter again: ",
+                this.name = Validate.getString(
+                        action.equals("update") ? "Enter updated name: "
+                        : "Enter name: ",
+                        "Must follow format.\n"
+                        + "Enter again: ",
                         Constant.REGEX_NAME
                 );
 
-                this.specialization = Validate.getInputString(
-                        isUpdate ? "Enter updated specialization: " : 
-                                "Enter specialization: ",
-                        "Must follow format.",
-                        "Enter again: ",
+                this.specialization = Validate.getString(
+                        action.equals("update") ? "Enter updated specialization: "
+                        : "Enter specialization: ",
+                        "Must follow format.\n"
+                        + "Enter again: ",
                         Constant.REGEX_SP
                 );
 
                 this.availability = Validate.getInt(
-                        isUpdate ? "Enter updated availability: " : 
-                                "Enter availability: ",
+                        action.equals("update") ? "Enter updated availability: "
+                        : "Enter availability: ",
                         "Please input a valid integer.",
                         "Please input correct format.",
                         Integer.MIN_VALUE,

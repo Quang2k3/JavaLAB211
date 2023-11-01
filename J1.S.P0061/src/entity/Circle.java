@@ -1,5 +1,7 @@
 package entity;
 
+import validate.Validate;
+
 /**
  *
  * @author Quang
@@ -39,5 +41,11 @@ public class Circle extends Shape {
         System.out.println("Radius: " + radius);
         System.out.println("Area: " + getArea());
         System.out.println("Perimeter: " + getPerimeter());
+    }
+
+    @Override
+    public void input() {
+        radius = Validate.getDouble("Enter radius of Circle: ", "Wrong", 
+                "Enter again: ", 0, Double.MAX_VALUE);
     }
 }

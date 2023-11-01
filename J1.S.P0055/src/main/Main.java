@@ -24,7 +24,7 @@ public class Main {
             System.out.println("5. Display list doctor");
             System.out.println("6. Exits");
             int choice = Validate.getInt(
-                    "Enter number of array: ",
+                    "Enter your choices: ",
                     "Number must be integer",
                     "Number of array", 
                     1, 6
@@ -34,28 +34,28 @@ public class Main {
                     doctorBO.add();
                     break;
                 case 2:
-                    String codeUpdate = Validate.getInputString(
+                    String codeUpdate = Validate.getString(
                             "Enter code: ", 
-                            "Please input correct format.", 
-                            "Enter again: ", 
+                            "Please input correct format.\n"
+                            + "Enter again: ", 
                             Constant.REGEX_ID
                     );
                     doctorBO.update(codeUpdate);
                     break;
                 case 3:
-                    String codeCheck = Validate.getInputString(
+                    String codeCheck = Validate.getString(
                             "Enter code: ",
-                            "Please input correct format.",
-                            "Enter again: ",
+                            "Please input correct format.\n"
+                            + "Enter again: ",
                             Constant.REGEX_ID
                     );
                     doctorBO.delete(codeCheck);
                     break;
                 case 4:
-                    String nameSearch = Validate.getInputString(
+                    String nameSearch = Validate.getString(
                             "Input name search: ",
-                            "Invalid name.",
-                            "Please try again: ",
+                            "Invalid name.\n"
+                            + "Please try again: ",
                             Constant.REGEX_NAME
                     );
                     doctorBO.search(nameSearch);

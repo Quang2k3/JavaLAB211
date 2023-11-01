@@ -119,7 +119,7 @@ public class StudentBO {
             count++;
         }
         System.out.print("Enter student: ");
-        int choice = Validate.checkInputIntLimit(1, listStudentFindByName.size());
+        int choice = Validate.getInt("", "", "", 1, listStudentFindByName.size());
         return listStudentFindByName.get(choice - 1);
     }
 
@@ -145,7 +145,8 @@ public class StudentBO {
                 String courseName = student.getCourseName();
                 String studentName = student.getStName();
                 for (Student student1 : students) {
-                    if (id.equalsIgnoreCase(student1.getID()) && courseName.equalsIgnoreCase(student1.getCourseName())) {
+                    if (id.equalsIgnoreCase(student1.getID())
+                            && courseName.equalsIgnoreCase(student1.getCourseName())) {
                         total++;
                     }
                 }

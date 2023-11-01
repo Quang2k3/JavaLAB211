@@ -11,4 +11,6 @@ public abstract class Shape {
     public abstract double getArea();
     
     public abstract void printResult();
+    
+    public abstract void input();
 }
