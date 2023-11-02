@@ -71,75 +71,46 @@ public class Doctor {
      * doctor.
      */
     public void input(List<Doctor> ld, String action) {
-        while (true) {
-            if (code == null || code.isEmpty()) {
+        if (action.equalsIgnoreCase("ADD")) {
+            boolean isCodeDuplicate;
+            do {
                 this.code = Validate.getString(
                         "Enter code: ",
-                        "Must follow format. "
+                        "Must follow the format."
                         + "\nEnter again: ",
                         Constant.REGEX_ID
                 );
-            }
 
-            Doctor existingDoctor = Validate.checkDuplicate(ld, this.code);
-
-            if (existingDoctor != null) {
-                if (action.equals("UPDATE")) {
-                    this.name = Validate.getString(
-                            "Enter updated name: ",
-                            "Must follow format.\n"
-                            + "Enter again: ",
-                            Constant.REGEX_NAME
-                    );
-
-                    this.specialization = Validate.getString(
-                            "Enter updated specialization: ",
-                            "Must follow format.\n"
-                            + "Enter again: ",
-                            Constant.REGEX_SP
-                    );
-
-                    this.availability = Validate.getInt(
-                            "Enter updated availability: ",
-                            "Please input a valid integer.",
-                            "Please input correct format.",
-                            Integer.MIN_VALUE,
-                            Integer.MAX_VALUE
-                    );
-                    break;
-                } else if (action.equals("ADD")) {
-                    System.out.println("Doctor with this code already exists. "
-                            + "Please choose a different code.");
-                    this.code = null;
+                isCodeDuplicate = ld.stream().anyMatch(doctor -> 
+                        doctor.getCode().equals(this.code));
+                if (isCodeDuplicate) {
+                    System.out.println("Code is already in use. "
+                            + "Please enter a different code.");
                 }
-            } else {
-                this.name = Validate.getString(
-                        action.equals("update") ? "Enter updated name: "
-                        : "Enter name: ",
-                        "Must follow format.\n"
-                        + "Enter again: ",
-                        Constant.REGEX_NAME
-                );
-
-                this.specialization = Validate.getString(
-                        action.equals("update") ? "Enter updated specialization: "
-                        : "Enter specialization: ",
-                        "Must follow format.\n"
-                        + "Enter again: ",
-                        Constant.REGEX_SP
-                );
-
-                this.availability = Validate.getInt(
-                        action.equals("update") ? "Enter updated availability: "
-                        : "Enter availability: ",
-                        "Please input a valid integer.",
-                        "Please input correct format.",
-                        Integer.MIN_VALUE,
-                        Integer.MAX_VALUE
-                );
-                break;
-            }
+            } while (isCodeDuplicate);
         }
+
+        this.name = Validate.getString(
+                "Enter name: ",
+                "Must be follow format. "
+                + "\nEnter again: ",
+                Constant.REGEX_NAME
+        );
+
+        this.specialization = Validate.getString(
+                "Enter specialization: ",
+                "Must be follow format. "
+                + "\nEnter again: ",
+                Constant.REGEX_SP
+        );
+
+        this.availability = Validate.getInt(
+                "Enter availability: ",
+                "Must be follow format.",
+                "Enter again: ",
+                Integer.MIN_VALUE,
+                Integer.MAX_VALUE
+        );
     }
 
     /**

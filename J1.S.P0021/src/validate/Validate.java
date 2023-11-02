@@ -55,24 +55,26 @@ public class Validate {
         } while (true);
     }
 
+    /**
+     *Prompt user for input, validate it using a regular expression, and return it.
+     * 
+     * @param messageInfo  Message displayed for user input.
+     * @param messageError Message for invalid input.
+     * @param REGEX        Regular expression for validation.
+     * @return Validated input matching the specified regular expression.
+     */
     public static String getString(
             String messageInfo,
-            String messageErrorFormat,
-            String messageErrorInvalidString,
-            String conditionString
+            String messageError,
+            final String REGEX
     ) {
         do {
-            try {
-                System.out.println(messageInfo);
-                String texts = SCANNER.nextLine().toUpperCase();
-                if (texts.matches(conditionString)) {
-                    return texts;
-                }
-                System.out.println(messageErrorFormat);
-
-            } catch (NumberFormatException e) {
-                System.out.println(messageErrorInvalidString);
+            System.out.print(messageInfo);
+            String str = SCANNER.nextLine();
+            if (str.matches(REGEX)) {
+                return str;
             }
+            System.out.println(messageError);
         } while (true);
     }
 
@@ -102,15 +104,19 @@ public class Validate {
         return true;
     }
 
-    public static boolean checkReportExist(List<Report> lr, String name,
-            String course, int total) {
-        for (Report report : lr) {
-            if (name.equalsIgnoreCase(report.getStudentName())
-                    && course.equalsIgnoreCase(report.getCourseName())
-                    && total == report.getTotalCourse()) {
-                return false;
+    /**
+     * Check if a doctor with the specified code already exists in the list.
+     *
+     * @param ld   The list of doctors to check for duplicates.
+     * @param code The code to check for duplicates.
+     * @return true if a doctor with the same code exists, otherwise false.
+     */
+    public static Student checkDuplicate(List<Student> ld, String code) {
+        for (Student student : ld) {
+            if (code.equalsIgnoreCase(student.getID())) {
+                return student;
             }
         }
-        return true;
+        return null;
     }
 }

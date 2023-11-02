@@ -73,41 +73,22 @@ public class Validate {
             System.out.println(messageError);
         } while (true);
     }
-    
-    /**
-     * Checks if a Doctor with a given code already exists in the list of Doctors.
-     *
-     * @param ld   The list of Doctors to check in.
-     * @param code The code to check for existence.
-     * @return true if the code does not exist in the list, false if it exists.
-     */
-    public static boolean checkCodeExist(List<Doctor> ld, String code) {
-        for (Doctor doctor : ld) {
-            if (code.equalsIgnoreCase(doctor.getCode())) {
-                return false;
-            }
-        }
-        return true;
-    }
 
-    /**
-     * Check if a doctor with the specified code already exists in the list.
-     *
-     * @param ld   The list of doctors to check for duplicates.
-     * @param code The code to check for duplicates.
-     * @return true if a doctor with the same code exists, otherwise false.
-     */
-    public static Doctor checkDuplicate(
-            List<Doctor> ld,
-            String code
-    ) {
-        for (Doctor doctor : ld) {
-            if (code.equalsIgnoreCase(doctor.getCode())) {
-                return doctor;
-            }
-        }
-        return null;
-    }
+//    /**
+//     * Check if a doctor with the specified code already exists in the list.
+//     *
+//     * @param ld   The list of doctors to check for duplicates.
+//     * @param code The code to check for duplicates.
+//     * @return true if a doctor with the same code exists, otherwise false.
+//     */
+//    public static Doctor checkDuplicate(List<Doctor> ld, String code) {
+//        for (Doctor doctor : ld) {
+//            if (code.equalsIgnoreCase(doctor.getCode())) {
+//                return doctor;
+//            }
+//        }
+//        return null;
+//    }
 
     /**
      * Checks if a Doctor's information has changed.

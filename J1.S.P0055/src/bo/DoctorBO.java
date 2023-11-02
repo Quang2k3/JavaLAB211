@@ -21,20 +21,22 @@ public class DoctorBO {
 
     /**
      * Add a new doctor to the list with user information.
+     * @return 
      */
-    public void add() {
+    public boolean add() {
         Doctor newDoctor = new Doctor();
         newDoctor.input(ld, "ADD"); 
         ld.add(newDoctor);
-        System.out.println("Doctor added successfully.");
+        return true;
     }
 
     /**
      * Update doctor information by their unique code.
      *
      * @param codeUpdate The code of the doctor to update.
+     * @return 
      */
-    public void update(String codeUpdate) {
+    public boolean update(String codeUpdate) {
         Doctor doctorToUpdate = null;
         for (Doctor doctor : ld) {
             if (codeUpdate.equalsIgnoreCase(doctor.getCode())) {
@@ -43,10 +45,10 @@ public class DoctorBO {
             }
         }
         if (doctorToUpdate != null) {
-            doctorToUpdate.input(ld, "UPDATE"); 
-            System.out.println("Doctor updated successfully");
+            doctorToUpdate.input(ld, ""); 
+            return true;
         } else {
-            System.out.println("Doctor with the entered code not found");
+            return false;
         }
     }
 
@@ -54,16 +56,16 @@ public class DoctorBO {
      * Deletes a doctor from the list by their unique code.
      *
      * @param code The unique code of the doctor to delete.
+     * @return 
      */
-    public void delete(String code) {
+    public boolean delete(String code) {
         Doctor doctor = getDoctorByCode(code);
         if (doctor == null) {
-            System.out.println("Doctor does not exist.");
-            return;
+            return false;
         } else {
             ld.remove(doctor);
         }
-        System.out.println("Doctor deleted successfully");
+        return true;
     }
 
     /**
@@ -88,7 +90,7 @@ public class DoctorBO {
      * @param code The code of the Doctor to retrieve.
      * @return the Doctor with the specified code, or null if not found.
      */
-    public Doctor getDoctorByCode(String code) {
+    private Doctor getDoctorByCode(String code) {
         for (Doctor doctor : ld) {
             if (doctor.getCode().equalsIgnoreCase(code)) {
                 return doctor;
@@ -102,14 +104,8 @@ public class DoctorBO {
      *
      * @param doctors The list of doctors to display
      */
-    public void displayListSearch(List<Doctor> doctors) {
-        if (!doctors.isEmpty()) {
-            doctors.forEach((Doctor doctor) -> {
-                doctor.display();
-            });
-        } else {
-            System.out.println("Can't not find the doctor.");
-        }
+    public void display(List<Doctor> doctors) {
+        display();
     }
 
     /**
@@ -121,7 +117,7 @@ public class DoctorBO {
                 doctor.display();
             });
         } else {
-            System.out.println("");
+            System.out.println("Do not have any Doctor");
         }
     }
 }

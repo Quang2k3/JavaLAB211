@@ -37,16 +37,16 @@ public class Main {
             );
             switch (choice) {
                 case 1: 
-                    studentBO.addStudent(ls);
+                    studentBO.add();
                     break;
                 case 2:
-                    studentBO.findAndSort();
+                    studentBO.displaySort();
                     break;
                 case 3:
-                    studentBO.updateOrDelete(count);
+//                    studentBO.updateOrDelete(count);
                     break;
                 case 4:
-                    studentBO.report();
+//                    studentBO.report();
                 case 5:
                     return;
             }
