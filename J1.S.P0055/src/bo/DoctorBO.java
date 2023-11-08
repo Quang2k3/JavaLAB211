@@ -3,6 +3,7 @@ package bo;
 import entity.Doctor;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -21,11 +22,12 @@ public class DoctorBO {
 
     /**
      * Add a new doctor to the list with user information.
-     * @return 
+     *
+     * @return
      */
     public boolean add() {
         Doctor newDoctor = new Doctor();
-        newDoctor.input(ld, "ADD"); 
+        newDoctor.input(ld, "ADD");
         ld.add(newDoctor);
         return true;
     }
@@ -34,7 +36,7 @@ public class DoctorBO {
      * Update doctor information by their unique code.
      *
      * @param codeUpdate The code of the doctor to update.
-     * @return 
+     * @return
      */
     public boolean update(String codeUpdate) {
         Doctor doctorToUpdate = null;
@@ -45,7 +47,7 @@ public class DoctorBO {
             }
         }
         if (doctorToUpdate != null) {
-            doctorToUpdate.input(ld, ""); 
+            doctorToUpdate.input(ld, "");
             return true;
         } else {
             return false;
@@ -56,7 +58,7 @@ public class DoctorBO {
      * Deletes a doctor from the list by their unique code.
      *
      * @param code The unique code of the doctor to delete.
-     * @return 
+     * @return
      */
     public boolean delete(String code) {
         Doctor doctor = getDoctorByCode(code);
@@ -105,19 +107,16 @@ public class DoctorBO {
      * @param doctors The list of doctors to display
      */
     public void display(List<Doctor> doctors) {
-        display();
-    }
-
-    /**
-     * Display the information of doctor.
-     */
-    public void display() {
-        if (!ld.isEmpty()) {
-            ld.forEach((Doctor doctor) -> {
+        if (!doctors.isEmpty()) {
+            doctors.forEach((Doctor doctor) -> {
                 doctor.display();
             });
         } else {
-            System.out.println("Do not have any Doctor");
+            System.out.println("No doctors found.");
         }
+    }
+
+    public void display() {
+        display(ld);
     }
 }

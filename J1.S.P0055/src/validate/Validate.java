@@ -1,7 +1,6 @@
 package validate;
 
 import entity.Doctor;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -73,22 +72,6 @@ public class Validate {
             System.out.println(messageError);
         } while (true);
     }
-
-//    /**
-//     * Check if a doctor with the specified code already exists in the list.
-//     *
-//     * @param ld   The list of doctors to check for duplicates.
-//     * @param code The code to check for duplicates.
-//     * @return true if a doctor with the same code exists, otherwise false.
-//     */
-//    public static Doctor checkDuplicate(List<Doctor> ld, String code) {
-//        for (Doctor doctor : ld) {
-//            if (code.equalsIgnoreCase(doctor.getCode())) {
-//                return doctor;
-//            }
-//        }
-//        return null;
-//    }
 
     /**
      * Checks if a Doctor's information has changed.

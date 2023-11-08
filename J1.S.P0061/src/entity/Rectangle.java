@@ -44,11 +44,6 @@ public class Rectangle extends Shape {
                     "Wrong", "Enter again: ", 0, Double.MAX_VALUE);
             length = Validate.getDouble("Please input length of Rectangle: ", 
                     "Wrong", "Enter again: ", 0, Double.MAX_VALUE);
-            if (width > length) {
-                System.out.println("Width cannot greater than length.");
-            } else {
-                break;
-            }
         }
     }
 }

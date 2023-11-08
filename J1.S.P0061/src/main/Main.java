@@ -12,16 +12,14 @@ import entity.Triangle;
 public class Main {
 
     public static void main(String[] args) {
-        Shape rectangle = new Rectangle();
-        Shape circle = new Circle();
-        Shape triangle = new Triangle();
-        
-        rectangle.input();
-        circle.input();
-        triangle.input();
-        
-        rectangle.printResult();
-        circle.printResult();
-        triangle.printResult();
+        Shape[] shapes = new Shape[3];
+        shapes[0] = new Rectangle();
+        shapes[1] = new Circle();
+        shapes[2] = new Triangle();
+
+        for (Shape shape : shapes) {
+            shape.input();
+            shape.printResult();
+        }
     }
 }
